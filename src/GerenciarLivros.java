@@ -29,6 +29,59 @@ public class GerenciarLivros {
         Main.demorar(2000);
     }
 
+    public static void updateLivro(Scanner sc)throws InputMismatchException {
+        Main.clearScreen();
+        if(sc == null) {
+            sc = new Scanner(System.in);
+        }
+
+        sc.nextLine();
+
+        if(livros.isEmpty()) {
+            System.out.println("Não há livros para serem atualizados!");
+            Main.demorar(1000);
+        }else {
+            System.out.println("Livro a ser atualizado: ");
+            String nomeOrig = sc.nextLine();
+            boolean existe = false;
+
+            for(Livro livro : livros) {
+                existe = livro.getTitulo().equalsIgnoreCase(nomeOrig);
+            }
+
+            if (existe) {
+                System.out.println("Atualizar livro: (Somente enter para não atualizar algum campo)");
+
+                System.out.print("Nome do livro: ");
+                String nome = sc.nextLine();
+
+                System.out.print("Autor do livro: ");
+                String autor = sc.nextLine();
+
+                System.out.print("Lancamento do livro: (0 para não atualizar)");
+                int ano = sc.nextInt();
+
+                for (Livro liv : livros) {
+                    if (!nome.isEmpty()) {
+                        liv.setTitulo(nome);
+                    }
+                    if (!autor.isEmpty()) {
+                        liv.setAutor(autor);
+                    }
+                    if (ano != 0) {
+                        liv.setAnoLancamento(ano);
+                    }
+                }
+
+                System.out.println("Livro atualizado com sucesso!");
+                Main.demorar(1500);
+            }else {
+                System.out.println("Não existe um livro com esse nome");
+                Main.demorar(1000);
+            }
+        }
+    }
+
     public static void delLivro(Scanner sc)throws InputMismatchException {
         Main.clearScreen();
 

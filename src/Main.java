@@ -28,7 +28,7 @@ public class Main {
 
                 switch (option) {
                     case 1:  GerenciarLivros.addLivro(sc); break;
-                    case 2:  break;
+                    case 2:  GerenciarLivros.updateLivro(sc); break;
                     case 3:  GerenciarLivros.delLivro(sc); break;
                     case 4:  GerenciarLivros.listaLivros(); break;
                     case 0: System.out.println("Programa Encerrado"); return;
