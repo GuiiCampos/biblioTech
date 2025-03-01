@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GerenciarLivros {
     private static List<Livro> livros = new ArrayList();
@@ -10,10 +7,10 @@ public class GerenciarLivros {
     public static void addLivro(Scanner sc)throws InputMismatchException {
         Main.clearScreen();
 
-        System.out.println("Adicionar Livro");
         if(sc == null) {
             sc = new Scanner(System.in);
         }
+        System.out.println("Adicionar Livro");
 
         sc.nextLine();
 
@@ -27,19 +24,47 @@ public class GerenciarLivros {
         int ano = sc.nextInt();
 
         livros.add(new Livro(nome, autor, ano));
+
         System.out.println("Livro adicionado com sucesso!");
         Main.demorar(2000);
+    }
+
+    public static void delLivro(Scanner sc)throws InputMismatchException {
+        Main.clearScreen();
+
+        if(sc == null) {
+            sc = new Scanner(System.in);
+        }
+
+        sc.nextLine();
+
+        if (livros.isEmpty()) {
+            System.out.println("\nLista vazia");
+            Main.demorar(1500);
+        } else {
+            System.out.println("\nDigite o nome do livro: ");
+            String nome = sc.nextLine();
+
+            boolean remov = livros.removeIf(livro -> livro.getTitulo().equalsIgnoreCase(nome));
+            if(remov) {
+                System.out.println("Livro removido com sucesso!");
+                Main.demorar(1000);
+            } else {
+                System.out.println("Livro não encontrado!");
+                Main.demorar(1000);
+            }
+        }
     }
 
     public static void listaLivros() {
         Main.clearScreen();
 
-        System.out.println("\nLista de livros");
-
-        if (livros.size() == 0) {
+        if (livros.isEmpty()) {
             System.out.println("Lista vazia, adicione algum livro");
             Main.demorar(1500);
         }else {
+            System.out.println("\nLista de livros");
+
             if (livros.size() > 1) {
                 System.out.println(livros.size() + " livros encontrados");
             } if (livros.size() == 1) {
