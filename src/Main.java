@@ -11,7 +11,7 @@ public class Main {
         clearScreen();
 
         while (true) {
-            System.out.println("BIBLIO-TECH");
+            System.out.println("\nBIBLIO-TECH");
             System.out.println("\nMenu de Seleção");
 
             System.out.println("\n1 - Adicionar um livro");
@@ -29,7 +29,7 @@ public class Main {
                     case 1:  GerenciarLivros.addLivro(sc); break;
                     case 2:  break;
                     case 3:  break;
-                    case 4:  break;
+                    case 4:  GerenciarLivros.listaLivros(); break;
                     case 0: System.out.println("Programa Encerrado"); return;
                     default:
                         System.out.println("Opção invalida");
