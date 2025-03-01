@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -21,17 +22,23 @@ public class Main {
 
             System.out.print("\nAguardando: ");
 
-            int option = sc.nextInt();
+            try {
+                int option = sc.nextInt();
 
-            switch (option) {
-                case 1:  break;
-                case 2:  break;
-                case 3:  break;
-                case 4:  break;
-                case 0: System.out.println("Programa Encerrado"); return;
-                default:
-                    System.out.println("Opção invalida");
-                    break;
+                switch (option) {
+                    case 1:  GerenciarLivros.addLivro(sc); break;
+                    case 2:  break;
+                    case 3:  break;
+                    case 4:  break;
+                    case 0: System.out.println("Programa Encerrado"); return;
+                    default:
+                        System.out.println("Opção invalida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada invalida, digite um número");
+                demorar(2000);
+                sc.nextLine();
             }
         }
     }
@@ -39,5 +46,13 @@ public class Main {
     static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    static void demorar(int num) {
+        try {
+            Thread.sleep(num);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
