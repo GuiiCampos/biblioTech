@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,17 +20,23 @@ public class Main {
 
             System.out.print("\nAguardando: ");
 
-            int option = sc.nextInt();
+            try {
+                int option = sc.nextInt();
 
-            switch (option) {
-                case 1: GerenciaLivros.addLivro();   break;
-                case 2:                    break;
-                case 3:                    break;
-                case 4: GerenciaLivros.allLivros();  break;
-                case 0: System.out.println("Programa Encerrado");
-                    return;
-                default: System.out.println("Opção invalida");
-                    break;
+                switch (option) {
+                    case 1: GerenciaLivros.addLivro();   break;
+                    case 2:                    break;
+                    case 3:                    break;
+                    case 4: GerenciaLivros.allLivros();  break;
+                    case 0: System.out.println("Programa Encerrado");
+                        return;
+                    default: System.out.println("Opção invalida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error, somente numeros!");
+                GerenciaLivros.demorar(1500);
+                sc.nextLine();
             }
         }
     }

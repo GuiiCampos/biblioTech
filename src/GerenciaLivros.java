@@ -1,11 +1,12 @@
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GerenciaLivros {
     static Scanner leitor = new Scanner(System.in);
     static File livros = new File("biblioteca.txt");
 
-    public static void addLivro() throws IllegalArgumentException {
+    public static void addLivro() throws InputMismatchException {
         System.out.print("Nome do livro: ");
         String nome = leitor.nextLine();
 
@@ -49,7 +50,7 @@ public class GerenciaLivros {
         }
     }
 
-    private static void demorar(int n) {
+    public static void demorar(int n) {
         try {
             Thread.sleep(n);
         } catch (InterruptedException e) {
