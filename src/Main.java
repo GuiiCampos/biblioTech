@@ -22,10 +22,10 @@ public class Main {
             int option = sc.nextInt();
 
             switch (option) {
-                case 1:                    break;
+                case 1: GerenciaLivros.addLivro();   break;
                 case 2:                    break;
                 case 3:                    break;
-                case 4: GerenciaLivros.allLivros(); break;
+                case 4: GerenciaLivros.allLivros();  break;
                 case 0: System.out.println("Programa Encerrado");
                     return;
                 default: System.out.println("Opção invalida");

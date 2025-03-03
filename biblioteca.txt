@@ -1,1 +1,3 @@
 Nome: teste1, Gênero: teste1, Lançamento: 1997
+
+Nome: teste2, Genêro: teste2, Ano: 1998
