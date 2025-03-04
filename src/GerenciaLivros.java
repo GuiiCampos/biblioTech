@@ -16,19 +16,8 @@ public class GerenciaLivros {
         System.out.println("Ano de lançamento: ");
         int ano = leitor.nextInt();
 
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(livros, true))) {
-            bw.newLine();
-            bw.write("Nome: " + nome);
-            bw.write(", Genêro: " + genero);
-            bw.write(", Ano: " + ano);
-            bw.flush();
+        addArquivo(nome, genero, ano);
 
-            System.out.println("Livro registrado com sucesso");
-            demorar(1500);
-
-        } catch (IOException e) {
-            System.out.println("Erro " + e.getMessage());
-        }
     }
 
     public static void allLivros() {
@@ -42,11 +31,27 @@ public class GerenciaLivros {
         } catch (IOException e) {
             System.out.println("Error" + e.getMessage());
         }
-
         try {
             System.in.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    //função que vai escrever no arquivo
+    private static void addArquivo(String nome, String genero, int ano) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(livros))) {
+            bw.newLine();
+            bw.write("Nome: " + nome);
+            bw.write(", Genêro: " + genero);
+            bw.write(", Ano: " + ano);
+            bw.flush();
+
+            System.out.println("Livro registrado com sucesso");
+            demorar(1500);
+
+        } catch (IOException e) {
+            System.out.println("Erro " + e.getMessage());
         }
     }
 
