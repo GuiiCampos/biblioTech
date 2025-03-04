@@ -113,25 +113,18 @@ public class GerenciaLivros {
     }
 
     public static void allLivros() {
-        if (!bibli.exists() || bibli.length() == 0) {
+        if (livros.isEmpty()) {
             System.out.println("Não há livros para serem listados!");
             demorar(1500);
 
         } else {
-            try (BufferedReader br = new BufferedReader(new FileReader(bibli))) {
-                int contadorLinhas = 0;
-                String linha;
-
-                while ((linha = br.readLine()) != null) {
-                    contadorLinhas++;
-                    System.out.println(linha);
-                }
-
-                System.out.println(contadorLinhas > 1 ? contadorLinhas + " livros encontrados" : contadorLinhas + " livro encontrado");
-
-            } catch (IOException e) {
-                System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            int contador = 0;
+            for (Livro livro : livros) {
+                contador++;
+                System.out.println(contador + ". " + livro);
             }
+
+            System.out.println(contador > 1 ? contador + " livros encontrados" : "1 livro encontrado");
 
             try {
                 System.in.read();
@@ -139,7 +132,6 @@ public class GerenciaLivros {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     //função que vai escrever no arquivo

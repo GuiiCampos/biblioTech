@@ -9,8 +9,8 @@ public class Main {
 
     static void menu(Scanner sc) {
         while (true) {
-            System.out.println("BIBLIO-TECH");
-            System.out.println("\nMenu de Seleção");
+            System.out.println("\nBIBLIO-TECH");
+            System.out.println("Menu de Seleção");
 
             System.out.println("\n1 - Adicionar um livro");
             System.out.println("2 - Atualizar um livro");

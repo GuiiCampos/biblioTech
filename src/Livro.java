@@ -34,4 +34,12 @@ public class Livro {
     public void setAnoLancamento(int anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
+
+    @Override
+    public String toString() {
+        return  "Nome: " + nome
+                + ", Genêro: " + genero
+                + ", Ano de lançamento: " + anoLancamento
+                ;
+    }
 }
