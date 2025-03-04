@@ -3,8 +3,12 @@ import java.util.*;
 
 public class GerenciaLivros {
     private static List<Livro> livros = new ArrayList();
-
     private static File bibli = new File("biblioteca.txt");
+
+    public static void startArq() {
+        carregarLivros();
+        System.out.println("Sistema inicializado");
+    }
 
     public static void addLivro(Scanner leitor) throws InputMismatchException {
 
@@ -147,6 +151,28 @@ public class GerenciaLivros {
         }
     }
 
+    //Carregar do arquivo para a lista
+    private static void carregarLivros() {
+        if (!bibli.exists()) return;
+
+        try(BufferedReader br = new BufferedReader(new FileReader(bibli))) {
+
+            String linha;
+            while ((linha = br.readLine()) != null) {
+
+                String[] partes = linha.split(";");
+                if (partes.length == 3) {
+                    try {
+                        livros.add(new Livro(partes[0], partes[1], Integer.parseInt(partes[2])));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Error ao carregar livro: " + linha);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+    }
 
     public static void demorar(int n) {
         try {
