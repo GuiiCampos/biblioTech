@@ -19,6 +19,7 @@ public class GerenciaLivros {
 
         livros.add(new Livro(nome, genero, ano));
 
+        System.out.println("Livro registrado com sucesso");
         addArquivo();
     }
 
@@ -29,42 +30,48 @@ public class GerenciaLivros {
             return;
         }
         System.out.println("Nome do livro a ser atualizado: ");
-        String nome = leitor.nextLine();
+        String nomeBusca = leitor.nextLine();
 
-        boolean existe = false;
+        Livro livroAtualizar = null;
 
         for (Livro livro : livros) {
-            existe = livro.getNome().equalsIgnoreCase(nome);
+            if (livro.getNome().equalsIgnoreCase(nomeBusca)) {
+                livroAtualizar = livro;
+                break;
+            }
         }
 
-        if (existe) {
-            System.out.println("Atualizar livro: (Para não atualizar algum campo, pressione ENTER)");
+        if (livroAtualizar != null) {
+            System.out.println("Atualizar livro. (Para não atualizar algum campo, pressione ENTER)");
 
-            System.out.print("Nome do livro: ");
-            nome = leitor.nextLine();
+            System.out.print("Novo nome do livro: ");
+            String novoNome = leitor.nextLine();
+            if (!novoNome.trim().isEmpty()) {
+                livroAtualizar.setNome(novoNome);
+            }
 
-            System.out.print("Genêro do livro: ");
-            String genero = leitor.nextLine();
+            System.out.print("Novo gênero do livro: ");
+            String novoGenero = leitor.nextLine();
+            if (!novoGenero.trim().isEmpty()) {
+                livroAtualizar.setGenero(novoGenero);
+            }
 
-            System.out.print("Lançamento do livro: (0 para não atualizar) ");
-            int ano = leitor.nextInt();
-
-            for (Livro liv : livros) {
-                if (!nome.isEmpty()) {
-                    liv.setNome(nome);
-                }
-                if (!genero.isEmpty()) {
-                    liv.setGenero(genero);
-                }
-                if (ano != 0) {
-                    liv.setAnoLancamento(ano);
+            System.out.print("Novo ano de lançamento (0 para não atualizar): ");
+            String inputAno = leitor.nextLine();
+            if (!inputAno.trim().isEmpty()) {
+                try {
+                    int novoAno = Integer.parseInt(inputAno);
+                    if (novoAno > 0) {
+                        livroAtualizar.setAnoLancamento(novoAno);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ano inválido, mantendo valor anterior.");
                 }
             }
 
-            System.out.println("Livro atualizado com sucesso");
+            System.out.println("Livro atualizado com sucesso!");
             demorar(1000);
             addArquivo();
-
         } else {
             System.out.println("Esse livro não foi encontrado!");
         }
@@ -139,7 +146,6 @@ public class GerenciaLivros {
                 bw.newLine();
             }
 
-            System.out.println("Livro registrado com sucesso");
             demorar(1500);
 
         } catch (IOException e) {
