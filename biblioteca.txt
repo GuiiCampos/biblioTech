@@ -1,2 +1,3 @@
-Nome: Gui, Genêro: ca, Ano: 1992
-Nome: tome, Genêro: aaa, Ano: 1922
+Nome: aaa, Genêro: aaa, Ano: 1223
+Nome: aaabb, Genêro: dass, Ano: 1331
+Nome: aasd, Genêro: ba, Ano: 221

@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GerenciaLivros {
-    private static Scanner leitor = new Scanner(System.in);
     private static List<Livro> livros = new ArrayList();
 
     private static File bibli = new File("biblioteca.txt");
 
-    public static void addLivro() throws InputMismatchException {
-        leitor.nextLine();
+    public static void addLivro(Scanner leitor) throws InputMismatchException {
 
         System.out.print("Nome do livro: ");
         String nome = leitor.nextLine();
