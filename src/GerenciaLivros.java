@@ -15,11 +15,17 @@ public class GerenciaLivros {
         String genero = leitor.nextLine();
 
         System.out.print("Ano de lançamento: ");
-        int ano = leitor.nextInt();
+        int ano = 0;
+        try {
+            ano = Integer.parseInt(leitor.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Ano inválido. Usando valor padrão 0.");
+        }
 
         livros.add(new Livro(nome, genero, ano));
 
         System.out.println("Livro registrado com sucesso");
+        demorar(1500);
         addArquivo();
     }
 
