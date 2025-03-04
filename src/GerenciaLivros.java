@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GerenciaLivros {
     private static List<Livro> livros = new ArrayList();
@@ -29,43 +26,77 @@ public class GerenciaLivros {
         if (livros.isEmpty()) {
             System.out.println("Não há livros para serem atualizados!");
             demorar(1500);
+            return;
+        }
+        System.out.println("Nome do livro a ser atualizado: ");
+        String nome = leitor.nextLine();
 
-        } else {
-            System.out.println("Nome do livro a ser atualizado: ");
-            String nome = leitor.nextLine();
+        boolean existe = false;
 
-            boolean existe = false;
+        for (Livro livro : livros) {
+            existe = livro.getNome().equalsIgnoreCase(nome);
+        }
 
-            for (Livro livro : livros) {
-                existe = livro.getNome().equalsIgnoreCase(nome);
-            }
+        if (existe) {
+            System.out.println("Atualizar livro: (Para não atualizar algum campo, pressione ENTER)");
 
-            if (existe) {
-                System.out.println("Atualizar livro: (Para não atualizar algum campo, pressione ENTER)");
+            System.out.print("Nome do livro: ");
+            nome = leitor.nextLine();
 
-                System.out.print("Nome do livro: ");
-                nome = leitor.nextLine();
+            System.out.print("Genêro do livro: ");
+            String genero = leitor.nextLine();
 
-                System.out.print("Genêro do livro: ");
-                String genero = leitor.nextLine();
+            System.out.print("Lançamento do livro: (0 para não atualizar) ");
+            int ano = leitor.nextInt();
 
-                System.out.print("Lançamento do livro: (0 para não atualizar) ");
-                int ano = leitor.nextInt();
-
-                for (Livro liv : livros) {
-                    if (!nome.isEmpty()) {
-                        liv.setNome(nome);
-                    }
-                    if (!genero.isEmpty()) {
-                        liv.setGenero(genero);
-                    }
-                    if (ano != 0) {
-                        liv.setAnoLancamento(ano);
-                    }
+            for (Livro liv : livros) {
+                if (!nome.isEmpty()) {
+                    liv.setNome(nome);
+                }
+                if (!genero.isEmpty()) {
+                    liv.setGenero(genero);
+                }
+                if (ano != 0) {
+                    liv.setAnoLancamento(ano);
                 }
             }
+
+            System.out.println("Livro atualizado com sucesso");
+            demorar(1000);
+            addArquivo();
+
+        } else {
+            System.out.println("Esse livro não foi encontrado!");
         }
-        addArquivo();
+    }
+
+    public static void deleteLivro(Scanner leitor) {
+        if (livros.isEmpty()) {
+            System.out.println("Não há livros para serem deletados!");
+            demorar(1500);
+            return;
+        }
+
+        System.out.println("Nome do livro a ser deletado: ");
+        String nome = leitor.nextLine();
+
+        boolean existe = false;
+
+        Iterator<Livro> iterator = livros.iterator();
+        while (iterator.hasNext()) {
+            Livro liv = iterator.next();
+            if (liv.getNome().equalsIgnoreCase(nome)) {
+                iterator.remove();
+                System.out.println("Livro removido com sucesso!");
+                existe = true;
+                addArquivo();
+                break;
+            }
+        }
+
+        if (!existe) {
+            System.out.println("Livro não encontrado!");
+        }
     }
 
     public static void allLivros() {
