@@ -1,2 +1,2 @@
-
-Nome: Tome, Genêro: Tome Jack, Ano: 1992
+Nome: Gui, Genêro: ca, Ano: 1992
+Nome: tome, Genêro: aaa, Ano: 1922

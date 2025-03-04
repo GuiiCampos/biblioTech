@@ -1,27 +1,34 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class GerenciaLivros {
-    static Scanner leitor = new Scanner(System.in);
-    static File livros = new File("biblioteca.txt");
+    private static Scanner leitor = new Scanner(System.in);
+    private static List<Livro> livros = new ArrayList();
+
+    private static File bibli = new File("biblioteca.txt");
 
     public static void addLivro() throws InputMismatchException {
+        leitor.nextLine();
+
         System.out.print("Nome do livro: ");
         String nome = leitor.nextLine();
 
         System.out.print("Gênero do livro: ");
         String genero = leitor.nextLine();
 
-        System.out.println("Ano de lançamento: ");
+        System.out.print("Ano de lançamento: ");
         int ano = leitor.nextInt();
 
-        addArquivo(nome, genero, ano);
+        livros.add(new Livro(nome, genero, ano));
 
+        addArquivo();
     }
 
     public static void allLivros() {
-        try (BufferedReader br = new BufferedReader(new FileReader(livros))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(bibli))) {
             String linha = br.readLine();
             while (linha != null) {
                 System.out.println(linha);
@@ -39,13 +46,14 @@ public class GerenciaLivros {
     }
 
     //função que vai escrever no arquivo
-    private static void addArquivo(String nome, String genero, int ano) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(livros))) {
-            bw.newLine();
-            bw.write("Nome: " + nome);
-            bw.write(", Genêro: " + genero);
-            bw.write(", Ano: " + ano);
-            bw.flush();
+    private static void addArquivo() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(bibli))) {
+            for (Livro livro : livros) {
+                bw.write("Nome: " + livro.getNome());
+                bw.write(", Genêro: " + livro.getGenero());
+                bw.write(", Ano: " + livro.getAnoLancamento());
+                bw.newLine();
+            }
 
             System.out.println("Livro registrado com sucesso");
             demorar(1500);
