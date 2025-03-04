@@ -25,6 +25,49 @@ public class GerenciaLivros {
         addArquivo();
     }
 
+    public static void updateLivro(Scanner leitor) throws InputMismatchException {
+        if (livros.isEmpty()) {
+            System.out.println("Não há livros para serem atualizados!");
+            demorar(1500);
+
+        } else {
+            System.out.println("Nome do livro a ser atualizado: ");
+            String nome = leitor.nextLine();
+
+            boolean existe = false;
+
+            for (Livro livro : livros) {
+                existe = livro.getNome().equalsIgnoreCase(nome);
+            }
+
+            if (existe) {
+                System.out.println("Atualizar livro: (Para não atualizar algum campo, pressione ENTER)");
+
+                System.out.print("Nome do livro: ");
+                nome = leitor.nextLine();
+
+                System.out.print("Genêro do livro: ");
+                String genero = leitor.nextLine();
+
+                System.out.print("Lançamento do livro: (0 para não atualizar) ");
+                int ano = leitor.nextInt();
+
+                for (Livro liv : livros) {
+                    if (!nome.isEmpty()) {
+                        liv.setNome(nome);
+                    }
+                    if (!genero.isEmpty()) {
+                        liv.setGenero(genero);
+                    }
+                    if (ano != 0) {
+                        liv.setAnoLancamento(ano);
+                    }
+                }
+            }
+        }
+        addArquivo();
+    }
+
     public static void allLivros() {
         try (BufferedReader br = new BufferedReader(new FileReader(bibli))) {
             String linha = br.readLine();

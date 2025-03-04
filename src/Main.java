@@ -25,10 +25,10 @@ public class Main {
                 sc.nextLine();
 
                 switch (option) {
-                    case 1: GerenciaLivros.addLivro(sc);      break;
-                    case 2:   break;
-                    case 3:                                 break;
-                    case 4: GerenciaLivros.allLivros();     break;
+                    case 1: GerenciaLivros.addLivro(sc);        break;
+                    case 2: GerenciaLivros.updateLivro(sc);     break;
+                    case 3:                                     break;
+                    case 4: GerenciaLivros.allLivros();         break;
                     case 0: System.out.println("Programa Encerrado");
                         return;
                     default: System.out.println("Opção invalida");
