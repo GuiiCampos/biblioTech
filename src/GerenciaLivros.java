@@ -136,20 +136,17 @@ public class GerenciaLivros {
 
     //função que vai escrever no arquivo
     private static void addArquivo() {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(bibli))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(bibli, false))) {
             for (Livro livro : livros) {
-                bw.write("Nome: " + livro.getNome());
-                bw.write(", Genêro: " + livro.getGenero());
-                bw.write(", Ano: " + livro.getAnoLancamento());
+                bw.write(livro.getNome() + ";" + livro.getGenero() + ";" + livro.getAnoLancamento());
                 bw.newLine();
             }
-
             demorar(1500);
-
         } catch (IOException e) {
-            System.out.println("Erro " + e.getMessage());
+            System.out.println("Erro ao salvar no arquivo: " + e.getMessage());
         }
     }
+
 
     public static void demorar(int n) {
         try {
